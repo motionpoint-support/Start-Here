@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Start Here: Your Training Library</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&amp;family=Lexend:wght@400;500;600;700&amp;family=Lato:wght@400;700;900&amp;display=swap">
+<style>
+body{margin:0;font-family:'Lato',system-ui,sans-serif;background:#0E1B2E;color:#0B2545}
+a{color:#1466F0}a:hover{color:#0B4FC0}
+.stage *{box-sizing:border-box}
+.mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace}
+.disp{font-family:'Lexend','Lato',sans-serif}
+.paused,.paused *{animation-play-state:paused !important}
+.sh{position:absolute;left:40px;top:-4px}
+.h2{font-family:'Lexend','Lato',sans-serif;font-size:30px;font-weight:700;color:#0B2545}
+.h2s{font-size:18px;color:#3B4F6B}
+.sc{position:absolute;top:66px;height:86px;border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.sr{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.sn{font-family:'Lexend','Lato',sans-serif;width:30px;height:30px;border-radius:15px;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex-shrink:0}
+.st{font-size:16px;font-weight:900;color:#0B2545;line-height:1.2}
+.tg{display:inline-flex;align-items:center;height:22px;padding:0 10px;border-radius:11px;color:#FFFFFF;font-size:11px;font-weight:900;letter-spacing:.03em;white-space:nowrap}
+.mk{position:absolute;right:-9px;bottom:-11px}
+.panel{position:absolute;left:40px;top:170px;width:1200px;height:460px;border-radius:22px;background:#FFFFFF;box-shadow:0 14px 36px rgba(11,37,69,.10);overflow:hidden}
+.win{position:absolute;left:0;top:0;width:1200px;height:460px;background:#FFFFFF}
+.ill{position:absolute;left:26px;top:26px;width:470px;height:408px;border-radius:18px;overflow:hidden}
+.tc{position:absolute;left:530px;top:30px;width:640px;display:flex;flex-direction:column;gap:12px}
+.eb{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.tt{font-family:'Lexend','Lato',sans-serif;font-size:28px;font-weight:700;color:#0B2545;line-height:1.2;margin-bottom:2px}
+.bl{display:flex;gap:12px;align-items:flex-start}
+.bn{width:26px;height:26px;border-radius:13px;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.bt{font-size:19px;line-height:1.4;color:#0B2545;font-weight:700}
+.lp{align-self:flex-start;margin-top:10px;height:46px;padding:0 20px 0 10px;border-radius:23px;display:inline-flex;align-items:center;gap:10px;font-size:17px;font-weight:900}
+.ex{margin-top:6px;border-radius:14px;background:#FFF7F0;border:2px dashed #C2410C;padding:12px 16px;display:flex;flex-direction:column;gap:6px}
+.exh{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#9A3412}
+.ext{font-size:17px;line-height:1.45;font-weight:700;color:#0B2545}
+.wc{position:absolute;background:#FFFFFF;border-radius:14px;box-shadow:0 10px 24px rgba(11,37,69,.14);overflow:hidden}
+.bar{height:30px;background:#E9EEF5;display:flex;align-items:center;gap:5px;padding:0 10px}
+.dot{width:8px;height:8px;border-radius:4px}
+.url{margin-left:6px;flex-grow:1;height:18px;border-radius:9px;background:#FFFFFF;font-size:11px;color:#3B4F6B;padding:0 8px;line-height:18px;white-space:nowrap;overflow:hidden}
+.ln{height:8px;border-radius:4px;background:#E3E9F2}
+.lab{font-size:12px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:#5A6B84}
+.fld{height:32px;border-radius:8px;border:2px solid #C9D3E1;display:flex;align-items:center;padding:0 10px;font-size:13px;color:#0B2545}
+.av{position:absolute}
+@keyframes panX{0%,15%{transform:translateX(0)}85%,100%{transform:translateX(-1264px)}}
+.shot{position:absolute;left:26px;top:26px;width:700px;height:408px;border-radius:14px;background:#EEF2F8;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.tc2{position:absolute;left:752px;top:30px;width:424px;display:flex;flex-direction:column;gap:12px}
+.call{margin-top:6px;border-radius:14px;background:#1466F0;color:#FFFFFF;padding:14px 18px;display:flex;flex-direction:column;gap:4px}
+.rz{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:16px;background:#FFF7F0;border:2px solid #C2410C;color:#7C2D12;font-size:14px;font-weight:900;white-space:nowrap}
+.ch{height:40px;padding:0 16px;border-radius:20px;background:#FFFFFF;display:inline-flex;align-items:center;font-size:15px;font-weight:900}
+.row{height:44px;border-radius:12px;background:#FFFFFF;display:flex;align-items:center;gap:10px;padding:0 14px;font-size:16px;font-weight:700;color:#0B2545;box-shadow:0 4px 10px rgba(11,37,69,.06)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeOut{from{opacity:1}to{opacity:0}}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes fromL{from{opacity:0;transform:translateX(-36px)}to{opacity:1;transform:none}}
+@keyframes fromR{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+@keyframes zoomIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes win{0%{opacity:0;transform:translateY(14px)}9%{opacity:1;transform:none}90%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-10px)}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(20,102,240,.45),0 18px 40px rgba(11,37,69,.14)}50%{box-shadow:0 0 0 16px rgba(20,102,240,0),0 18px 40px rgba(11,37,69,.14)}}
+@keyframes warnPulse{0%,100%{box-shadow:0 0 0 0 rgba(234,88,12,.55)}50%{box-shadow:0 0 0 12px rgba(234,88,12,0)}}
+@keyframes press{0%,100%{transform:scale(1)}50%{transform:scale(.94)}}
+@keyframes typeIn{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes stamp{0%{opacity:0;transform:scale(1.7) rotate(-7deg)}60%{opacity:1;transform:scale(.95) rotate(-7deg)}100%{opacity:1;transform:scale(1) rotate(-7deg)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes march{to{stroke-dashoffset:-72}}
+@keyframes arc{from{stroke-dashoffset:302}to{stroke-dashoffset:0}}
+@keyframes pass{from{transform:translateX(0)}to{transform:translateX(196px)}}
+@keyframes toL{from{opacity:1;transform:none}to{opacity:0;transform:translate(-320px,250px) scale(.35)}}
+@keyframes toR{from{opacity:1;transform:none}to{opacity:0;transform:translate(320px,250px) scale(.35)}}
+@keyframes hiO{0%{background:#FFFFFF}100%{background:#FFF1E6;box-shadow:0 0 0 3px #C2410C}}
+@keyframes toGrey{to{background:#94A3B8}}
+@keyframes litRing{0%{box-shadow:0 0 0 0 currentColor;transform:none}8%,92%{box-shadow:0 0 0 4px currentColor,0 16px 30px rgba(11,37,69,.18);transform:translateY(-6px)}100%{box-shadow:0 0 0 0 transparent;transform:none}}
+.ctl{height:44px;min-width:44px;padding:0 14px;border-radius:10px;border:1px solid #2A3E5C;background:#15263F;color:#E6EEF8;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;cursor:pointer;white-space:nowrap}
+.ctl:hover{background:#1D3354}
+.ctl.main{background:#1466F0;border-color:#1466F0;color:#fff}
+.ctl.main:hover{background:#0B55D0}
+.chip{height:32px;padding:0 7px;letter-spacing:-.01em;border-radius:16px;border:1px solid #2A3E5C;background:transparent;color:#A9B8CC;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.chip:hover{color:#fff;border-color:#4A6488}
+.chip.done{color:#D5E0EE;border-color:#34507A;background:#16304F}
+.chip.on{color:#0B2545;background:#8FD16F;border-color:#8FD16F}
+</style>
+<style>
+html,body{height:100%}
+body{display:flex;align-items:center;justify-content:center;overflow:hidden}
+#fit{width:1280px;height:870px;transform-origin:center center;flex-shrink:0}
+[hidden]{display:none !important}
+</style>
+</head>
+<body>
+<div id="fit">
+<div style="width: 1280px; height: 870px; background: #0E1B2E; display: flex; flex-direction: column; overflow: hidden;">
+
+<!-- hidden symbol library -->
+<svg width="0" height="0" style="position: absolute; width: 0; height: 0;" aria-hidden="true">
+<defs>
+<symbol id="dc-customer" viewBox="0 0 200 200">
+<path d="M58 88 C52 38 148 38 142 88 L146 124 C132 132 124 116 122 104 L78 104 C76 116 68 132 54 124 Z" fill="#3B2A26"></path>
+<path d="M40 200 C40 150 66 128 100 128 C134 128 160 150 160 200 Z" fill="#23A094"></path>
+<path d="M84 129 L100 152 L116 129 Z" fill="#E6F6F3"></path>
+<rect x="89" y="104" width="22" height="28" rx="8" fill="#E2A77F"></rect>
+<ellipse cx="100" cy="82" rx="32" ry="36" fill="#F1C39E"></ellipse>
+<path d="M66 76 C68 42 132 40 136 78 C118 64 94 60 70 80 Z" fill="#3B2A26"></path>
+<circle cx="88" cy="87" r="3.8" fill="#1F2937"></circle>
+<circle cx="112" cy="87" r="3.8" fill="#1F2937"></circle>
+<circle cx="79" cy="98" r="5.5" fill="#F29A86" opacity=".45"></circle>
+<circle cx="121" cy="98" r="5.5" fill="#F29A86" opacity=".45"></circle>
+<path d="M90 102 Q100 109 110 102" stroke="#A0523D" stroke-width="3" fill="none" stroke-linecap="round"></path>
+</symbol>
+<symbol id="dc-agent" viewBox="0 0 200 200">
+<path d="M40 200 C40 150 66 128 100 128 C134 128 160 150 160 200 Z" fill="#1466F0"></path>
+<path d="M84 129 L100 150 L116 129 Z" fill="#FFFFFF"></path>
+<rect x="89" y="104" width="22" height="28" rx="8" fill="#B97A55"></rect>
+<ellipse cx="68" cy="88" rx="7" ry="10" fill="#C98B63"></ellipse>
+<ellipse cx="132" cy="88" rx="7" ry="10" fill="#C98B63"></ellipse>
+<ellipse cx="100" cy="82" rx="32" ry="36" fill="#D39A72"></ellipse>
+<path d="M67 80 C62 42 138 40 133 80 C126 60 80 58 67 80 Z" fill="#1F1A17"></path>
+<circle cx="88" cy="87" r="3.8" fill="#1F2937"></circle>
+<circle cx="112" cy="87" r="3.8" fill="#1F2937"></circle>
+<path d="M89 101 Q100 109 111 101" stroke="#7A3B2A" stroke-width="3" fill="none" stroke-linecap="round"></path>
+</symbol>
+<symbol id="dc-server" viewBox="0 0 120 150">
+<rect x="10" y="6" width="100" height="40" rx="8" fill="#243B5E"></rect>
+<rect x="10" y="54" width="100" height="40" rx="8" fill="#2E4A73"></rect>
+<rect x="10" y="102" width="100" height="40" rx="8" fill="#243B5E"></rect>
+<circle cx="28" cy="26" r="5" fill="#8FD16F"></circle><circle cx="28" cy="74" r="5" fill="#8FD16F"></circle><circle cx="28" cy="122" r="5" fill="#8FD16F"></circle>
+<rect x="46" y="22" width="50" height="8" rx="4" fill="#5B7BA6"></rect><rect x="46" y="70" width="50" height="8" rx="4" fill="#5B7BA6"></rect><rect x="46" y="118" width="50" height="8" rx="4" fill="#5B7BA6"></rect>
+</symbol>
+<symbol id="dc-check" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="11" fill="#3E9B2F"></circle>
+<path d="M6.5 12.5 L10.3 16.2 L17.5 8.6" stroke="#FFFFFF" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+</symbol>
+<symbol id="dc-x" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="11" fill="#C2410C"></circle>
+<path d="M8 8l8 8M16 8l-8 8" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"></path>
+</symbol>
+<symbol id="dc-warn" viewBox="0 0 24 24">
+<path d="M12 3 L22 20.5 H2 Z" fill="#F2A93B" stroke="#8A5200" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M12 9.5 V14.5" stroke="#5A3500" stroke-width="2.2" stroke-linecap="round"></path>
+<circle cx="12" cy="17.4" r="1.3" fill="#5A3500"></circle>
+</symbol>
+<symbol id="dc-ticket" viewBox="0 0 24 24">
+<path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3a2 2 0 0 0 0-4z" fill="none" stroke="currentColor" stroke-width="1.8"></path>
+<path d="M9 5v14" stroke="currentColor" stroke-width="1.8" stroke-dasharray="2 2.4"></path>
+</symbol>
+<symbol id="dc-clock" viewBox="0 0 24 24">
+<circle cx="12" cy="13" r="8.5" fill="none" stroke="currentColor" stroke-width="1.9"></circle>
+<path d="M12 8.5V13l3 2M10 2.5h4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"></path>
+</symbol>
+<symbol id="dc-phone" viewBox="0 0 24 24">
+<path d="M5 3.5h3.5l2 5-2.5 1.6a11 11 0 0 0 5.4 5.4l1.6-2.5 5 2v3.5a2 2 0 0 1-2 2A17 17 0 0 1 3 5.5a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path>
+</symbol>
+<symbol id="dc-cal" viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"></rect>
+<path d="M16 3v4M8 3v4M3 10h18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"></path>
+</symbol>
+<symbol id="dc-mail" viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"></rect>
+<path d="M3.5 7l8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path>
+</symbol>
+<symbol id="dc-lock" viewBox="0 0 24 24">
+<rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"></rect>
+<path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.9"></path>
+<circle cx="12" cy="15.6" r="1.6" fill="currentColor"></circle>
+</symbol>
+<symbol id="dc-doc" viewBox="0 0 40 48">
+<path d="M4 4h22l10 10v30H4z" fill="#FFFFFF" stroke="#6D4AE0" stroke-width="2.4" stroke-linejoin="round"></path>
+<path d="M26 4v10h10" fill="none" stroke="#6D4AE0" stroke-width="2.4" stroke-linejoin="round"></path>
+<path d="M11 24h18M11 31h18M11 38h12" stroke="#B9A8F2" stroke-width="3" stroke-linecap="round"></path>
+</symbol>
+<symbol id="dc-img" viewBox="0 0 24 24">
+<rect x="3" y="4" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"></rect>
+<circle cx="9" cy="9.5" r="1.8" fill="currentColor"></circle>
+<path d="M3.5 17l5-5 4 4 3-3 5 5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path>
+</symbol>
+<symbol id="dc-play" viewBox="0 0 24 24">
+<path d="M7 4.5v15l12-7.5z" fill="currentColor"></path>
+</symbol>
+<symbol id="dc-edit" viewBox="0 0 24 24">
+<path d="M4 20h4L19 9l-4-4L4 16z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path>
+<path d="M13.5 6.5l4 4" fill="none" stroke="currentColor" stroke-width="1.9"></path>
+</symbol>
+</defs>
+</svg>
+
+<!-- ===================== STAGE ===================== -->
+<div id="stage" class="stage" style="position: relative; width: 1280px; height: 720px; overflow: hidden; background: #F3F6FB; flex-shrink: 0;">
+
+<div style="position: absolute; left: -160px; top: -200px; width: 560px; height: 560px; border-radius: 50%; background: #E6EEFA;"></div>
+<div style="position: absolute; right: -120px; bottom: -220px; width: 520px; height: 520px; border-radius: 50%; background: #EAF5E4;"></div>
+
+<div style="position: absolute; left: 28px; top: 14px; display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; color: #3B4F6B; letter-spacing: .02em;">
+<span id="steps" style="display: contents;"></span>
+<span class="disp" style="font-weight: 700; color: #0B2545; font-size: 16px;">MotionPoint Support</span>
+<span style="width: 4px; height: 4px; border-radius: 2px; background: #94A3B8;"></span>
+<span>New Agent Training &middot; Start Here</span>
+</div>
+
+<!-- ============ SCENE 0 · INTRO ============ -->
+<template id="scene-0">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div style="position: absolute; left: 0; top: 34px; width: 1280px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;"><div style="font-size: 16px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; color: #3E8A2A; animation: up .8s .4s both;">Customer Support &middot; New Agent Training</div><h1 class="disp" style="margin: 0; font-size: 60px; line-height: 1.05; font-weight: 700; color: #0B2545; animation: up .9s .9s both;">Start Here: Your Training Library</h1><p style="margin: 0; font-size: 23px; color: #3B4F6B; max-width: 1040px; animation: up .9s 1.6s both;">Everything you need to learn the job, and do it well. In one place.</p></div>
+<div style="position: absolute; left: 40px; top: 240px; width: 280px; height: 180px; border-radius: 16px; background: #E5F4DE; border: 3px solid #2F7A22; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 4.5s both;"><span class="eb" style="color: #2F7A22;">43 trainings</span><span style="font-size: 17px; font-weight: 700; color: #0B2545; line-height: 1.4;">Short animated videos, from your first day to the P1 outage process.</span></div>
+<div style="position: absolute; left: 340px; top: 240px; width: 280px; height: 180px; border-radius: 16px; background: #DCE7F7; border: 3px solid #1466F0; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 7s both;"><span class="eb" style="color: #1466F0;">Search anytime</span><span style="font-size: 17px; font-weight: 700; color: #0B2545; line-height: 1.4;">Forgot something? Type a word and find the right video in seconds.</span></div>
+<div style="position: absolute; left: 640px; top: 240px; width: 280px; height: 180px; border-radius: 16px; background: #FCE3CC; border: 3px solid #C2410C; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 9.5s both;"><span class="eb" style="color: #C2410C;">Kits and templates</span><span style="font-size: 17px; font-weight: 700; color: #0B2545; line-height: 1.4;">Copy-ready notes, emails and signatures, right inside the videos.</span></div>
+<div style="position: absolute; left: 940px; top: 240px; width: 300px; height: 180px; border-radius: 16px; background: #E8EAFD; border: 3px solid #5867E8; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 12s both;"><span class="eb" style="color: #5867E8;">A graduation quiz</span><span style="font-size: 17px; font-weight: 700; color: #0B2545; line-height: 1.4;">9 levels and 120 questions to prove what you&rsquo;ve learned.</span></div>
+<div style="position: absolute; left: 160px; top: 456px; width: 960px; height: 100px; border-radius: 20px; background: #0B2545; color: #FFFFFF; display: flex; align-items: center; gap: 18px; padding: 0 30px; animation: up .7s 16s both;"><svg width="40" height="40" style="flex-shrink: 0; color: #FFD27A;"><use href="#dc-play"></use></svg><span style="font-size: 21px; font-weight: 900; line-height: 1.4;">Welcome aboard! Here&rsquo;s a quick tour, so you get the most out of every training.</span></div>
+</div>
+</template>
+
+<!-- ============ SCENE 1 · URGENT? ============ -->
+<template id="scene-1">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 1: Everything you need, in one place</div><div class="h2s">What the library covers.</div></div>
+<div class="sc" style="left: 40px; width: 592px; background: #E5F4DE; color: #2F7A22; animation: up .6s 1.4s both, litRing 22s 4s both;"><div class="sr"><span class="sn" style="background: #2F7A22;">1</span><span class="tg" style="background: #2F7A22;">Five topics</span></div><div class="st">43 trainings</div><svg class="mk" width="28" height="28" style="animation: pop .5s 25.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="sc" style="left: 648px; width: 592px; background: #E5F4DE; color: #2F7A22; animation: up .6s 1.6s both, litRing 22s 26s both;"><div class="sr"><span class="sn" style="background: #2F7A22;">2</span><span class="tg" style="background: #2F7A22;">A to Z</span></div><div class="st">Your job</div><svg class="mk" width="28" height="28" style="animation: pop .5s 47.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="panel" style="animation: up .7s 2.2s both;">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #8A99AD; animation: fadeOut .5s 3.8s forwards;">So, what&rsquo;s in here?</div>
+<div class="win" style="animation: win 22s 4s both;">
+<div class="shot" style="background: #F3F6FB; display: block;"><div style="position: absolute; left: 20px; top: 14px; width: 660px; display: flex; flex-direction: column; gap: 8px;"><div style="display: flex; gap: 12px; align-items: center; height: 64px; padding: 0 14px; border-radius: 14px; background: #E5F4DE; border: 2px solid #2F7A22; animation: fromL .5s 5s both;"><b style="width: 130px; flex-shrink: 0; font-size: 15px; color: #2F7A22;">Getting started</b><span style="font-size: 13px; color: #0B2545; line-height: 1.4;">Welcome, Teams etiquette, the proxy, how cases begin, the DOs and DON&rsquo;Ts, tech issues, the Glossary</span></div><div style="display: flex; gap: 12px; align-items: center; height: 64px; padding: 0 14px; border-radius: 14px; background: #E8EAFD; border: 2px solid #5867E8; animation: fromL .5s 6.6s both;"><b style="width: 130px; flex-shrink: 0; font-size: 15px; color: #5867E8;">Salesforce</b><span style="font-size: 13px; color: #0B2545; line-height: 1.4;">Hiccups, Accounts and Entitlements, My Day, your List View, email signatures, creating cases, call invites</span></div><div style="display: flex; gap: 12px; align-items: center; height: 64px; padding: 0 14px; border-radius: 14px; background: #FCE3CC; border: 2px solid #C2410C; animation: fromL .5s 8.2s both;"><b style="width: 130px; flex-shrink: 0; font-size: 15px; color: #C2410C;">Case types</b><span style="font-size: 13px; color: #0B2545; line-height: 1.4;">Offline, Misalignment, Translation, the PE queues, Spikes, QA, outages, PDRs, security issues</span></div><div style="display: flex; gap: 12px; align-items: center; height: 64px; padding: 0 14px; border-radius: 14px; background: #E3E8F0; border: 2px solid #0B2545; animation: fromL .5s 9.8s both;"><b style="width: 130px; flex-shrink: 0; font-size: 15px; color: #0B2545;">Procedures</b><span style="font-size: 13px; color: #0B2545; line-height: 1.4;">Billing, the email shift, on-call, App A, MAP calls, the P1 outage process, your dashboard</span></div><div style="display: flex; gap: 12px; align-items: center; height: 64px; padding: 0 14px; border-radius: 14px; background: #DCE7F7; border: 2px solid #1466F0; animation: fromL .5s 11.4s both;"><b style="width: 130px; flex-shrink: 0; font-size: 15px; color: #1466F0;">Tools &amp; tech</b><span style="font-size: 13px; color: #0B2545; line-height: 1.4;">HAR files, Charles, the CDN, Translation Memory, Directive Tags, Live Edit, Memory Manager, the API</span></div></div></div>
+<div class="tc2">
+<div class="eb" style="color: #2F7A22;">Everything you need &middot; 1 of 2</div>
+<div class="tt" style="font-size: 26px;">Five topics, 43 trainings</div>
+<div class="bl" style="animation: fromR .6s 5s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">1</span><span class="bt" style="font-size: 18px;">Getting started and Salesforce.</span></div>
+<div class="bl" style="animation: fromR .6s 8.2s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">2</span><span class="bt" style="font-size: 18px;">Every case type, and how to route it.</span></div>
+<div class="bl" style="animation: fromR .6s 11.4s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">3</span><span class="bt" style="font-size: 18px;">Procedures, tools and tech.</span></div>
+</div>
+</div>
+<div class="win" style="animation: win 22s 26s both;">
+<div class="shot" style="background: #E5F4DE; display: block;"><div style="position: absolute; left: 20px; top: 14px; width: 660px; height: 150px; border-radius: 20px; background: #0B2545; color: #FFFFFF; display: flex; align-items: center; gap: 18px; padding: 0 30px; animation: up .7s 27s both;"><svg width="46" height="46" style="flex-shrink: 0; color: #FFD27A;"><use href="#dc-check"></use></svg><span style="font-size: 20px; font-weight: 900; line-height: 1.4;">These trainings hold everything you need to learn the job, and carry it out well.</span></div><div style="position: absolute; left: 20px; top: 182px; width: 320px; height: 196px; border-radius: 16px; background: #FCE3CC; border: 3px solid #C2410C; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 31s both; justify-content: flex-start;"><b style="font-size: 15px; color: #0B2545;">What they don&rsquo;t cover</b><span style="font-size: 14px; color: #0B2545; line-height: 1.45;">Each customer&rsquo;s own preferences, likes and dislikes. You&rsquo;ll learn those case by case, with your team.</span></div><div style="position: absolute; left: 360px; top: 182px; width: 320px; height: 196px; border-radius: 16px; background: #E5F4DE; border: 3px solid #2F7A22; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 34s both; justify-content: flex-start;"><b style="font-size: 15px; color: #0B2545;">New, or a veteran?</b><span style="font-size: 14px; color: #0B2545; line-height: 1.45;">New: it&rsquo;s your path to learn the job. Veteran: it&rsquo;s your refresher, whenever you forget something.</span></div></div>
+<div class="tc2">
+<div class="eb" style="color: #2F7A22;">Everything you need &middot; 2 of 2</div>
+<div class="tt" style="font-size: 26px;">Your job, from A to Z</div>
+<div class="bl" style="animation: fromR .6s 27s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">1</span><span class="bt" style="font-size: 18px;">Everything to do the job well.</span></div>
+<div class="bl" style="animation: fromR .6s 31s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">2</span><span class="bt" style="font-size: 18px;">Customer preferences: learned on the job.</span></div>
+<div class="bl" style="animation: fromR .6s 34s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">3</span><span class="bt" style="font-size: 18px;">For new agents and veterans alike.</span></div>
+</div>
+</div>
+</div>
+</div>
+</template>
+
+<!-- ============ SCENE 2 · WHO ============ -->
+<template id="scene-2">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 2: Find your way around</div><div class="h2s">The library page, in two minutes.</div></div>
+<div class="sc" style="left: 40px; width: 592px; background: #DCE7F7; color: #1466F0; animation: up .6s 1.4s both, litRing 22s 4s both;"><div class="sr"><span class="sn" style="background: #1466F0;">1</span><span class="tg" style="background: #1466F0;">Start at #1</span></div><div class="st">In order</div><svg class="mk" width="28" height="28" style="animation: pop .5s 25.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="sc" style="left: 648px; width: 592px; background: #FCE3CC; color: #C2410C; animation: up .6s 1.6s both, litRing 22s 26s both;"><div class="sr"><span class="sn" style="background: #C2410C;">2</span><span class="tg" style="background: #C2410C;">Any word</span></div><div class="st">Search</div><svg class="mk" width="28" height="28" style="animation: pop .5s 47.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="panel" style="animation: up .7s 2.2s both;">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #8A99AD; animation: fadeOut .5s 3.8s forwards;">Let&rsquo;s open the library.</div>
+<div class="win" style="animation: win 22s 4s both;">
+<div class="shot" style="background: #DCE7F7; display: block;"><div class="wc" style="left: 20px; top: 14px; width: 660px; height: 364px; background: #FFFFFF; overflow: hidden; animation: zoomIn .6s 4.5s both;"><div style="padding: 12px 14px; background: #F3F6FB; height: 100%; display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 10px; font-weight: 900; letter-spacing: .12em; color: #2F7A22;">MOTIONPOINT CUSTOMER SUPPORT &middot; NEW AGENT TRAINING</span><b style="font-size: 20px; color: #0B2545;">Support Training Video Library</b><div style="height: 32px; border-radius: 10px; border: 2px solid #DCE1E8; background: #FFF; display: flex; align-items: center; padding: 0 10px; font-size: 12.5px; color: #8A99AD;">&#128269;&nbsp; Search by keyword: Bcc, PID, outage, Express, Charles</div><div style="display: flex; gap: 6px; flex-wrap: wrap;"><span style="padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; border: 1px solid #DCE1E8; background: #1466F0; color: #FFF;">All trainings</span><span style="padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; border: 1px solid #DCE1E8; background: #FFF; color: #0B2545;">Getting started</span><span style="padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; border: 1px solid #DCE1E8; background: #FFF; color: #0B2545;">Salesforce</span><span style="padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; border: 1px solid #DCE1E8; background: #FFF; color: #0B2545;">Case types</span><span style="padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; border: 1px solid #DCE1E8; background: #FFF; color: #0B2545;">Procedures</span><span style="padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; border: 1px solid #DCE1E8; background: #FFF; color: #0B2545;">Tools &amp; tech</span></div><span style="font-size: 11px; color: #3B4F6B;">43 trainings, then graduation</span><div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;"><div style="display: flex; gap: 8px; align-items: flex-start; padding: 8px; border-radius: 10px; background: #FFF; border: 1px solid #DCE1E8; animation: up .4s 5.5s both; box-shadow: 0 0 0 3px #F6A600;"><span style="width: 26px; height: 26px; border-radius: 7px; background: #2F7A22; color: #FFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</span><span style="font-size: 11.5px; font-weight: 800; color: #0B2545; line-height: 1.3;">Welcome to Customer Support<br><span style="display: inline-block; margin-top: 3px; padding: 1px 6px; border-radius: 999px; background: #FFE45C; font-size: 9.5px;">Start here</span></span></div><div style="display: flex; gap: 8px; align-items: flex-start; padding: 8px; border-radius: 10px; background: #FFF; border: 1px solid #DCE1E8; animation: up .4s 5.75s both;"><span style="width: 26px; height: 26px; border-radius: 7px; background: #2F7A22; color: #FFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</span><span style="font-size: 11.5px; font-weight: 800; color: #0B2545; line-height: 1.3;">Teams Status and Daily Etiquette</span></div><div style="display: flex; gap: 8px; align-items: flex-start; padding: 8px; border-radius: 10px; background: #FFF; border: 1px solid #DCE1E8; animation: up .4s 6s both;"><span style="width: 26px; height: 26px; border-radius: 7px; background: #1466F0; color: #FFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</span><span style="font-size: 11.5px; font-weight: 800; color: #0B2545; line-height: 1.3;">How the Proxy Works</span></div><div style="display: flex; gap: 8px; align-items: flex-start; padding: 8px; border-radius: 10px; background: #FFF; border: 1px solid #DCE1E8; animation: up .4s 6.25s both;"><span style="width: 26px; height: 26px; border-radius: 7px; background: #2F7A22; color: #FFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">4</span><span style="font-size: 11.5px; font-weight: 800; color: #0B2545; line-height: 1.3;">How a Support Case Begins</span></div><div style="display: flex; gap: 8px; align-items: flex-start; padding: 8px; border-radius: 10px; background: #FFF; border: 1px solid #DCE1E8; animation: up .4s 6.5s both;"><span style="width: 26px; height: 26px; border-radius: 7px; background: #2F7A22; color: #FFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">5</span><span style="font-size: 11.5px; font-weight: 800; color: #0B2545; line-height: 1.3;">The DOs and DON&rsquo;Ts of Support</span></div><div style="display: flex; gap: 8px; align-items: flex-start; padding: 8px; border-radius: 10px; background: #FFF; border: 1px solid #DCE1E8; animation: up .4s 6.75s both;"><span style="width: 26px; height: 26px; border-radius: 7px; background: #2F7A22; color: #FFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">6</span><span style="font-size: 11.5px; font-weight: 800; color: #0B2545; line-height: 1.3;">Reporting Technical&nbsp;Issues</span></div></div></div></div></div>
+<div class="tc2">
+<div class="eb" style="color: #1466F0;">Find your way &middot; 1 of 2</div>
+<div class="tt" style="font-size: 26px;">Watch them in order</div>
+<div class="bl" style="animation: fromR .6s 6s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">1</span><span class="bt" style="font-size: 18px;">Numbered tiles: start with #1.</span></div>
+<div class="bl" style="animation: fromR .6s 9s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">2</span><span class="bt" style="font-size: 18px;">Each one builds on the one before.</span></div>
+<div class="bl" style="animation: fromR .6s 12s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">3</span><span class="bt" style="font-size: 18px;">Click a tile to open its video.</span></div>
+</div>
+</div>
+<div class="win" style="animation: win 22s 26s both;">
+<div class="shot" style="background: #FCE3CC; display: block;"><div class="wc" style="left: 20px; top: 14px; width: 660px; height: 364px; background: #FFFFFF; overflow: hidden; animation: zoomIn .6s 26.5s both;"><div style="padding: 12px 14px; background: #F3F6FB; height: 100%; display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 10px; font-weight: 900; letter-spacing: .12em; color: #2F7A22;">MOTIONPOINT CUSTOMER SUPPORT &middot; NEW AGENT TRAINING</span><b style="font-size: 20px; color: #0B2545;">Support Training Video Library</b><div style="height: 32px; border-radius: 10px; border: 2px solid #1466F0; background: #FFF; display: flex; align-items: center; padding: 0 10px; font-size: 12.5px; color: #0B2545;">&#128269;&nbsp; Charles</div><div style="display: flex; gap: 6px; flex-wrap: wrap;"><span style="padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; border: 1px solid #DCE1E8; background: #FFF; color: #0B2545;">All trainings</span><span style="padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; border: 1px solid #DCE1E8; background: #FFF; color: #0B2545;">Getting started</span><span style="padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; border: 1px solid #DCE1E8; background: #FFF; color: #0B2545;">Salesforce</span><span style="padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; border: 1px solid #DCE1E8; background: #FFF; color: #0B2545;">Case types</span><span style="padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; border: 1px solid #DCE1E8; background: #FFF; color: #0B2545;">Procedures</span><span style="padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; border: 1px solid #DCE1E8; background: #1466F0; color: #FFF; border-color: #1466F0; box-shadow: 0 0 0 3px #F6A600; animation: pop .45s 35s both;">Tools &amp; tech</span></div><span style="font-size: 11px; color: #3B4F6B;">Showing 1 of 43 trainings</span><div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;"><div style="display: flex; gap: 8px; align-items: flex-start; padding: 8px; border-radius: 10px; background: #FFF; border: 1px solid #DCE1E8; animation: up .4s 27.5s both; box-shadow: 0 0 0 3px #F6A600;"><span style="width: 26px; height: 26px; border-radius: 7px; background: #1466F0; color: #FFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">27</span><span style="font-size: 11.5px; font-weight: 800; color: #0B2545; line-height: 1.3;">Pushing Content with <mark style="background: #FFE45C;">Charles</mark></span></div></div></div></div><div style="position: absolute; left: 560px; top: 84px; width: 34px; height: 34px; border-radius: 17px; background: #1466F0; color: #FFFFFF; border: 3px solid #FFFFFF; box-shadow: 0 4px 10px rgba(0,0,0,.25); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; z-index: 4; animation: pop .45s 28s both;">1</div><div style="position: absolute; left: 632px; top: 114px; width: 34px; height: 34px; border-radius: 17px; background: #1466F0; color: #FFFFFF; border: 3px solid #FFFFFF; box-shadow: 0 4px 10px rgba(0,0,0,.25); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; z-index: 4; animation: pop .45s 35s both;">2</div></div>
+<div class="tc2">
+<div class="eb" style="color: #C2410C;">Find your way &middot; 2 of 2</div>
+<div class="tt" style="font-size: 26px;">Search, or filter</div>
+<div class="bl" style="animation: fromR .6s 28s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">Type any word: a tool, a queue, a term.</span></div>
+<div class="bl" style="animation: fromR .6s 35s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">2</span><span class="bt" style="font-size: 18px;">Or pick a topic chip.</span></div>
+<div class="call" style="background: #0B2545; animation: pop .5s 39s both;"><span class="lab" style="color: #FFFFFF; opacity: .8;">Shortcut</span><span style="font-size: 18px; font-weight: 900; line-height: 1.35;">Tip: press / on your keyboard to jump to the search box.</span></div>
+</div>
+</div>
+</div>
+</div>
+</template>
+
+<!-- ============ SCENE 3 · ESCALATE ============ -->
+<template id="scene-3">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 3: Inside a training video</div><div class="h2s">The player, and how to use it.</div></div>
+<div class="sc" style="left: 40px; width: 592px; background: #E8EAFD; color: #5867E8; animation: up .6s 1.4s both, litRing 22s 4s both;"><div class="sr"><span class="sn" style="background: #5867E8;">1</span><span class="tg" style="background: #5867E8;">Play, skip, chapters</span></div><div class="st">Controls</div><svg class="mk" width="28" height="28" style="animation: pop .5s 25.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="sc" style="left: 648px; width: 592px; background: #E8EAFD; color: #5867E8; animation: up .6s 1.6s both, litRing 22s 26s both;"><div class="sr"><span class="sn" style="background: #5867E8;">2</span><span class="tg" style="background: #5867E8;">And music</span></div><div class="st">Captions</div><svg class="mk" width="28" height="28" style="animation: pop .5s 47.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="panel" style="animation: up .7s 2.2s both;">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #8A99AD; animation: fadeOut .5s 3.8s forwards;">Now, open a video.</div>
+<div class="win" style="animation: win 22s 4s both;">
+<div class="shot" style="background: #E8EAFD; display: block;"><div class="wc" style="left: 20px; top: 14px; width: 660px; height: 364px; background: #FFFFFF; overflow: hidden; animation: zoomIn .6s 4.5s both;"><div style="height: 100%; display: flex; flex-direction: column; background: #F3F6FB;"><div style="flex: 1; position: relative; padding: 12px 14px;"><span style="display: inline-flex; gap: 8px; align-items: center; padding: 4px 10px 4px 4px; border-radius: 999px; background: #0B2545; color: #FFF; font-size: 11px; font-weight: 900;"><span style="width: 22px; height: 22px; border-radius: 11px; background: #5DB645; color: #0B2545; display: inline-flex; align-items: center; justify-content: center;">2</span>PART 2 OF 7</span><div style="margin-top: 10px; font-size: 18px; font-weight: 800; color: #0B2545;">Part 2: Find the Emergency POCs</div><div style="margin-top: 10px; height: 120px; border-radius: 12px; background: #FFF; border: 1px solid #DCE1E8;"></div><span style="position: absolute; right: 12px; top: 10px; padding: 5px 12px; border-radius: 999px; background: #0F7C7A; color: #FFF; font-size: 11px; font-weight: 900;">P1 kit</span></div><div style="background: #0B1A30; color: #F4F7FB; text-align: center; font-size: 12px; font-weight: 700; padding: 8px;">Open the Business Entity, then Related Contacts.</div><div style="height: 4px; background: #233A5C;"><div style="width: 34%; height: 100%; background: #5DB645;"></div></div><div style="background: #0B1A30; padding: 8px 10px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap;"><span style="height: 26px; padding: 0 8px; border-radius: 6px; background: #1466F0; color: #FFF; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; box-shadow: 0 0 0 3px #F6A600; animation: pop .45s 6s both;">&#10074;&#10074; Pause</span><span style="height: 26px; padding: 0 8px; border-radius: 6px; background: #1B2C47; color: #FFF; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; box-shadow: 0 0 0 3px #F6A600; animation: pop .45s 8s both;">&laquo; 10s</span><span style="height: 26px; padding: 0 8px; border-radius: 6px; background: #1B2C47; color: #FFF; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; box-shadow: 0 0 0 3px #F6A600; animation: pop .45s 8.4s both;">10s &raquo;</span><span style="height: 26px; padding: 0 8px; border-radius: 6px; background: #1B2C47; color: #FFF; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center;">&#9835;</span><span style="height: 26px; padding: 0 8px; border-radius: 6px; background: #1B2C47; color: #FFF; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center;">CC</span><span style="display: inline-flex; gap: 4px; padding: 2px; border-radius: 999px; box-shadow: 0 0 0 3px #F6A600; animation: pop .45s 11s both;"><span style="padding: 3px 7px; border-radius: 999px; border: 1px solid #34507A; font-size: 10px; font-weight: 700; color: #A9B8CC; background: transparent;">Intro</span><span style="padding: 3px 7px; border-radius: 999px; border: 1px solid #34507A; font-size: 10px; font-weight: 700; color: #A9B8CC; background: transparent;">Part 1</span><span style="padding: 3px 7px; border-radius: 999px; border: 1px solid #34507A; font-size: 10px; font-weight: 700; color: #0B2545; background: #8FD16F;">Part 2</span><span style="padding: 3px 7px; border-radius: 999px; border: 1px solid #34507A; font-size: 10px; font-weight: 700; color: #A9B8CC; background: transparent;">Part 3</span><span style="padding: 3px 7px; border-radius: 999px; border: 1px solid #34507A; font-size: 10px; font-weight: 700; color: #A9B8CC; background: transparent;">Practice</span></span><span style="margin-left: auto; font-size: 11px; color: #A9B8CC;">1:42 / 6:24</span></div></div></div></div>
+<div class="tc2">
+<div class="eb" style="color: #5867E8;">Inside a video &middot; 1 of 2</div>
+<div class="tt" style="font-size: 26px;">You&rsquo;re in control</div>
+<div class="bl" style="animation: fromR .6s 6s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">Play and pause anytime.</span></div>
+<div class="bl" style="animation: fromR .6s 8s both;"><span class="bn" style="background: #E8EAFD; color: #5867E8;">2</span><span class="bt" style="font-size: 18px;">Back or forward 10 seconds.</span></div>
+<div class="bl" style="animation: fromR .6s 11s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">3</span><span class="bt" style="font-size: 18px;">Chapters: jump to any part.</span></div>
+</div>
+</div>
+<div class="win" style="animation: win 22s 26s both;">
+<div class="shot" style="background: #DCE7F7; display: block;"><div class="wc" style="left: 20px; top: 14px; width: 660px; height: 364px; background: #FFFFFF; overflow: hidden; animation: zoomIn .6s 26.5s both;"><div style="height: 100%; display: flex; flex-direction: column; background: #F3F6FB;"><div style="flex: 1; position: relative; padding: 12px 14px;"><span style="display: inline-flex; gap: 8px; align-items: center; padding: 4px 10px 4px 4px; border-radius: 999px; background: #0B2545; color: #FFF; font-size: 11px; font-weight: 900; box-shadow: 0 0 0 3px #F6A600; animation: pop .45s 35s both;"><span style="width: 22px; height: 22px; border-radius: 11px; background: #5DB645; color: #0B2545; display: inline-flex; align-items: center; justify-content: center;">2</span>PART 2 OF 7</span><div style="margin-top: 10px; font-size: 18px; font-weight: 800; color: #0B2545;">Part 2: Find the Emergency POCs</div><div style="margin-top: 10px; height: 120px; border-radius: 12px; background: #FFF; border: 1px solid #DCE1E8;"></div><span style="position: absolute; right: 12px; top: 10px; padding: 5px 12px; border-radius: 999px; background: #0F7C7A; color: #FFF; font-size: 11px; font-weight: 900;">P1 kit</span></div><div style="background: #0B1A30; color: #F4F7FB; text-align: center; font-size: 12px; font-weight: 700; padding: 8px; box-shadow: inset 0 0 0 3px #F6A600; animation: pop .45s 28.4s both;">Open the Business Entity, then Related Contacts.</div><div style="height: 4px; background: #233A5C;"><div style="width: 34%; height: 100%; background: #5DB645;"></div></div><div style="background: #0B1A30; padding: 8px 10px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap;"><span style="height: 26px; padding: 0 8px; border-radius: 6px; background: #1466F0; color: #FFF; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center;">&#10074;&#10074; Pause</span><span style="height: 26px; padding: 0 8px; border-radius: 6px; background: #1B2C47; color: #FFF; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center;">&laquo; 10s</span><span style="height: 26px; padding: 0 8px; border-radius: 6px; background: #1B2C47; color: #FFF; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center;">10s &raquo;</span><span style="height: 26px; padding: 0 8px; border-radius: 6px; background: #1B2C47; color: #FFF; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; box-shadow: 0 0 0 3px #F6A600; animation: pop .45s 32s both;">&#9835;</span><span style="height: 26px; padding: 0 8px; border-radius: 6px; background: #1B2C47; color: #FFF; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; box-shadow: 0 0 0 3px #F6A600; animation: pop .45s 28s both;">CC</span><span style="display: inline-flex; gap: 4px; padding: 2px; border-radius: 999px;"><span style="padding: 3px 7px; border-radius: 999px; border: 1px solid #34507A; font-size: 10px; font-weight: 700; color: #A9B8CC; background: transparent;">Intro</span><span style="padding: 3px 7px; border-radius: 999px; border: 1px solid #34507A; font-size: 10px; font-weight: 700; color: #A9B8CC; background: transparent;">Part 1</span><span style="padding: 3px 7px; border-radius: 999px; border: 1px solid #34507A; font-size: 10px; font-weight: 700; color: #0B2545; background: #8FD16F;">Part 2</span><span style="padding: 3px 7px; border-radius: 999px; border: 1px solid #34507A; font-size: 10px; font-weight: 700; color: #A9B8CC; background: transparent;">Part 3</span><span style="padding: 3px 7px; border-radius: 999px; border: 1px solid #34507A; font-size: 10px; font-weight: 700; color: #A9B8CC; background: transparent;">Practice</span></span><span style="margin-left: auto; font-size: 11px; color: #A9B8CC;">1:42 / 6:24</span></div></div></div></div>
+<div class="tc2">
+<div class="eb" style="color: #1466F0;">Inside a video &middot; 2 of 2</div>
+<div class="tt" style="font-size: 26px;">Captions, music, parts</div>
+<div class="bl" style="animation: fromR .6s 28s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">CC: captions on or off.</span></div>
+<div class="bl" style="animation: fromR .6s 32s both;"><span class="bn" style="background: #E8EAFD; color: #5867E8;">2</span><span class="bt" style="font-size: 18px;">Music on or off.</span></div>
+<div class="bl" style="animation: fromR .6s 35s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">3</span><span class="bt" style="font-size: 18px;">The badge shows which part you&rsquo;re in.</span></div>
+<div class="call" style="background: #0B2545; animation: pop .5s 39s both;"><span class="lab" style="color: #FFFFFF; opacity: .8;">Good to know</span><span style="font-size: 18px; font-weight: 900; line-height: 1.35;">Every video ends with practice questions and a recap.</span></div>
+</div>
+</div>
+</div>
+</div>
+</template>
+
+<!-- ============ SCENE 4 · PROTECT CASES ============ -->
+<template id="scene-4">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 4: Kits and templates</div><div class="h2s">Shortcuts that make documentation easy.</div></div>
+<div class="sc" style="left: 40px; width: 592px; background: #FCE3CC; color: #C2410C; animation: up .6s 1.4s both, litRing 22s 4s both;"><div class="sr"><span class="sn" style="background: #C2410C;">1</span><span class="tg" style="background: #C2410C;">Where they are</span></div><div class="st">The buttons</div><svg class="mk" width="28" height="28" style="animation: pop .5s 25.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="sc" style="left: 648px; width: 592px; background: #E5F4DE; color: #2F7A22; animation: up .6s 1.6s both, litRing 22s 26s both;"><div class="sr"><span class="sn" style="background: #2F7A22;">2</span><span class="tg" style="background: #2F7A22;">Copy, paste</span></div><div class="st">How they work</div><svg class="mk" width="28" height="28" style="animation: pop .5s 47.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="panel" style="animation: up .7s 2.2s both;">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #8A99AD; animation: fadeOut .5s 3.8s forwards;">Here&rsquo;s a favorite.</div>
+<div class="win" style="animation: win 22s 4s both;">
+<div class="shot" style="background: #FDF1DC; display: block;"><div style="position: absolute; left: 20px; top: 14px; width: 660px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;"><div style="padding: 14px; border-radius: 16px; background: #FFF; border: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px; height: 170px; animation: pop .5s 5s both;"><span style="align-self: flex-start; padding: 6px 14px; border-radius: 999px; background: #1466F0; color: #FFF; font-size: 14px; font-weight: 900; box-shadow: 0 4px 12px rgba(0,0,0,.18);">Copy signature</span><span style="font-size: 12px; font-weight: 900; color: #3B4F6B; letter-spacing: .04em;">#12 Email Signatures</span><span style="font-size: 13.5px; color: #0B2545; line-height: 1.4;">Type your name, copy your Salesforce or Outlook signature.</span></div><div style="padding: 14px; border-radius: 16px; background: #FFF; border: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px; height: 170px; animation: pop .5s 7s both;"><span style="align-self: flex-start; padding: 6px 14px; border-radius: 999px; background: #B42318; color: #FFF; font-size: 14px; font-weight: 900; box-shadow: 0 4px 12px rgba(0,0,0,.18);">P1 kit</span><span style="font-size: 12px; font-weight: 900; color: #3B4F6B; letter-spacing: .04em;">#40 The P1 Outage Process</span><span style="font-size: 13.5px; color: #0B2545; line-height: 1.4;">Builds the P1 Teams chat title and first message.</span></div><div style="padding: 14px; border-radius: 16px; background: #FFF; border: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px; height: 170px; animation: pop .5s 9s both;"><span style="align-self: flex-start; padding: 6px 14px; border-radius: 999px; background: #0F7C7A; color: #FFF; font-size: 14px; font-weight: 900; box-shadow: 0 4px 12px rgba(0,0,0,.18);">SecOps kit</span><span style="font-size: 12px; font-weight: 900; color: #3B4F6B; letter-spacing: .04em;">#42 Security Issues</span><span style="font-size: 13.5px; color: #0B2545; line-height: 1.4;">Every note and email for a security case, ready to copy.</span></div><div style="padding: 14px; border-radius: 16px; background: #FFF; border: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px; height: 170px; animation: pop .5s 11s both;"><span style="align-self: flex-start; padding: 6px 14px; border-radius: 999px; background: #5867E8; color: #FFF; font-size: 14px; font-weight: 900; box-shadow: 0 4px 12px rgba(0,0,0,.18);">Note templates</span><span style="font-size: 12px; font-weight: 900; color: #3B4F6B; letter-spacing: .04em;">#17 PE Queues</span><span style="font-size: 13.5px; color: #0B2545; line-height: 1.4;">A copy-ready internal note for each PE queue.</span></div></div></div>
+<div class="tc2">
+<div class="eb" style="color: #B7791F;">Kits and templates &middot; 1 of 2</div>
+<div class="tt" style="font-size: 26px;">Look for the button</div>
+<div class="bl" style="animation: fromR .6s 5s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">1</span><span class="bt" style="font-size: 18px;">Top right of some videos.</span></div>
+<div class="bl" style="animation: fromR .6s 8s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">2</span><span class="bt" style="font-size: 18px;">Fill in a few fields.</span></div>
+<div class="bl" style="animation: fromR .6s 11s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">3</span><span class="bt" style="font-size: 18px;">Copy, paste, done.</span></div>
+</div>
+</div>
+<div class="win" style="animation: win 22s 26s both;">
+<div class="shot" style="background: #E5F4DE; display: block;"><div class="wc" style="left: 20px; top: 14px; width: 400px; height: 364px; background: #FFFFFF; overflow: hidden; animation: zoomIn .6s 26.5s both;"><div style="height: 34px; background: #0F7C7A; color: #FFFFFF; display: flex; align-items: center; padding: 0 14px; font-size: 13px; font-weight: 700;">SecOps kit</div><div style="padding: 12px 14px; display: flex; flex-direction: column; gap: 10px;"><div style="display: flex; gap: 8px;"><span style="flex: 1; height: 30px; border: 2px solid #DCE1E8; border-radius: 8px; padding: 0 8px; font-size: 12px; display: flex; align-items: center; color: #0B2545;">00012345</span><span style="flex: 1; height: 30px; border: 2px solid #DCE1E8; border-radius: 8px; padding: 0 8px; font-size: 12px; display: flex; align-items: center; color: #0B2545;">Scan finding</span><span style="flex: 1; height: 30px; border: 2px solid #DCE1E8; border-radius: 8px; padding: 0 8px; font-size: 12px; display: flex; align-items: center; color: #0B2545;">Northwind</span></div><div style="border: 1px solid #DCE1E8; border-radius: 10px; padding: 10px;"><div style="display: flex; justify-content: space-between; align-items: center;"><b style="font-size: 13px;">Internal Post</b><span style="padding: 4px 12px; border-radius: 999px; background: #2F7A22; color: #FFF; font-size: 12px; font-weight: 800; box-shadow: 0 0 0 3px #F6A600; animation: pop .45s 30s both;">Copy</span></div><div style="margin-top: 8px; padding: 8px; border-radius: 8px; background: #F3F6FB; font-size: 12px; color: #0B2545;">Internal Email has been sent to SecOps team, CXM has been CCd, pending on their response.</div></div><span style="font-size: 13px; font-weight: 800; color: #2F7A22; animation: fadeIn .4s 31s both;">&#10003; Copied.</span></div></div><div style="position: absolute; left: 440px; top: 14px; width: 240px; height: 364px; border-radius: 16px; background: #E5F4DE; border: 3px solid #2F7A22; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 34s both; justify-content: flex-start;"><b style="font-size: 16px; color: #0B2545;">Why it helps</b><span style="font-size: 14px; color: #0B2545; line-height: 1.5;">The same wording every time, nothing missed, and less typing. Your notes look clear and professional, on every case.</span></div></div>
+<div class="tc2">
+<div class="eb" style="color: #2F7A22;">Kits and templates &middot; 2 of 2</div>
+<div class="tt" style="font-size: 26px;">Documentation made easy</div>
+<div class="bl" style="animation: fromR .6s 28s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">Your case details fill in for you.</span></div>
+<div class="bl" style="animation: fromR .6s 30s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">2</span><span class="bt" style="font-size: 18px;">One click to copy.</span></div>
+<div class="bl" style="animation: fromR .6s 34s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">3</span><span class="bt" style="font-size: 18px;">Consistent, complete notes.</span></div>
+</div>
+</div>
+</div>
+</div>
+</template>
+
+<!-- ============ SCENE 5 · ANY TIME ============ -->
+<template id="scene-5">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 5: Practice, then graduate</div><div class="h2s">Test yourself as you go, and at the end.</div></div>
+<div class="sc" style="left: 40px; width: 592px; background: #DCE7F7; color: #1466F0; animation: up .6s 1.4s both, litRing 22s 4s both;"><div class="sr"><span class="sn" style="background: #1466F0;">1</span><span class="tg" style="background: #1466F0;">In every video</span></div><div class="st">Practice</div><svg class="mk" width="28" height="28" style="animation: pop .5s 25.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="sc" style="left: 648px; width: 592px; background: #FCE3CC; color: #C2410C; animation: up .6s 1.6s both, litRing 22s 26s both;"><div class="sr"><span class="sn" style="background: #C2410C;">2</span><span class="tg" style="background: #C2410C;">The quiz</span></div><div class="st">Graduation</div><svg class="mk" width="28" height="28" style="animation: pop .5s 47.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="panel" style="animation: up .7s 2.2s both;">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #8A99AD; animation: fadeOut .5s 3.8s forwards;">How do you know you&rsquo;ve got it?</div>
+<div class="win" style="animation: win 22s 4s both;">
+<div class="shot" style="background: #DCE7F7; display: block;"><div style="position: absolute; left: 20px; top: 14px; width: 320px; height: 364px; border-radius: 16px; background: #DCE7F7; border: 3px solid #1466F0; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 5s both; justify-content: flex-start;"><b style="font-size: 16px; color: #0B2545;">In every video</b><span style="font-size: 14px; color: #0B2545; line-height: 1.5;">The last part asks &ldquo;What would you do?&rdquo; Think of your answer before it appears. Then a recap sums it all up.</span><div style="margin-top: 10px; padding: 12px; border-radius: 12px; background: #FFF; font-size: 13px; color: #0B2545; animation: up .5s 8s both;"><span class="lab">Question 1</span><br><b>A Site Outage case comes in as Standard. What do you do?</b></div></div><div style="position: absolute; left: 360px; top: 14px; width: 320px; height: 364px; border-radius: 16px; background: #E5F4DE; border: 3px solid #2F7A22; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 11s both; justify-content: flex-start;"><b style="font-size: 16px; color: #0B2545;">Learn at your own pace</b><span style="font-size: 14px; color: #0B2545; line-height: 1.5;">Rewatch any part as often as you like. Keep your own notes file as you go. Stuck? Look it up first, then ask.</span></div></div>
+<div class="tc2">
+<div class="eb" style="color: #1466F0;">Practice &middot; 1 of 2</div>
+<div class="tt" style="font-size: 26px;">Practice is built in</div>
+<div class="bl" style="animation: fromR .6s 5s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">Practice questions in every video.</span></div>
+<div class="bl" style="animation: fromR .6s 8s both;"><span class="bn" style="background: #E8EAFD; color: #5867E8;">2</span><span class="bt" style="font-size: 18px;">A recap at the end.</span></div>
+<div class="bl" style="animation: fromR .6s 11s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">3</span><span class="bt" style="font-size: 18px;">Rewatch anytime.</span></div>
+</div>
+</div>
+<div class="win" style="animation: win 22s 26s both;">
+<div class="shot" style="background: #FDF1DC; display: block;"><div style="position: absolute; left: 20px; top: 24px; width: 660px; height: 340px; border-radius: 20px; background: #FFF4E0; border: 3px solid #FFC27A; animation: pop .5s 27s both;"></div><div style="position: absolute; left: 60px; top: 60px; width: 580px; display: flex; flex-direction: column; gap: 12px; animation: up .5s 28s both;"><span style="align-self: flex-start; padding: 4px 12px; border-radius: 999px; background: #FF8A3D; color: #FFF; font-size: 13px; font-weight: 900;">Final step &middot; Graduation</span><b class="disp" style="font-size: 30px; color: #0B2545;">Support Case Quest</b><span style="font-size: 16px; color: #3B4F6B; line-height: 1.5;">9 levels &middot; 120 questions &middot; points, streaks and a Boss Round. Wrong answer? It tells you why, and which training to review.</span><span style="align-self: flex-start; padding: 8px 18px; border-radius: 999px; background: #FF8A3D; color: #FFF; font-size: 15px; font-weight: 900;">Take the quiz &rarr;</span></div><span style="position: absolute; left: 40px; top: 8px; width: 48px; height: 48px; padding: 4px; border-radius: 13px; background: #FFF; box-shadow: 0 4px 10px rgba(0,0,0,.18); display: flex; transform: rotate(-12deg); animation: pop .45s 30s both;"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M20 4l4.7 9.6 10.6 1.5-7.7 7.5 1.8 10.5L20 28l-9.4 5.1 1.8-10.5-7.7-7.5 10.6-1.5z" fill="#F6B100"/></svg></span><span style="position: absolute; left: 560px; top: 4px; width: 48px; height: 48px; padding: 4px; border-radius: 13px; background: #FFF; box-shadow: 0 4px 10px rgba(0,0,0,.18); display: flex; transform: rotate(10deg); animation: pop .45s 30.4s both;"><svg width="40" height="40" viewBox="0 0 40 40"><rect x="7" y="4" width="3" height="33" rx="1.5" fill="#5B6474"/><g><rect x="10" y="5" width="7" height="6" fill="#111"/><rect x="17" y="5" width="7" height="6" fill="#FFF"/><rect x="24" y="5" width="7" height="6" fill="#111"/><rect x="31" y="5" width="5" height="6" fill="#FFF"/><rect x="10" y="11" width="7" height="6" fill="#FFF"/><rect x="17" y="11" width="7" height="6" fill="#111"/><rect x="24" y="11" width="7" height="6" fill="#FFF"/><rect x="31" y="11" width="5" height="6" fill="#111"/><rect x="10" y="17" width="7" height="6" fill="#111"/><rect x="17" y="17" width="7" height="6" fill="#FFF"/><rect x="24" y="17" width="7" height="6" fill="#111"/><rect x="31" y="17" width="5" height="6" fill="#FFF"/></g><rect x="10" y="5" width="26" height="18" fill="none" stroke="#111" stroke-width="1"/></svg></span><span style="position: absolute; left: 620px; top: 262px; width: 48px; height: 48px; padding: 4px; border-radius: 13px; background: #FFF; box-shadow: 0 4px 10px rgba(0,0,0,.18); display: flex; transform: rotate(-8deg); animation: pop .45s 30.8s both;"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M10 14c0-6 5-10 11-10h3c6 0 10 5 10 11v7c0 5-4 9-9 9H17c-4 0-7-3-7-7z" fill="#E5484D"/><path d="M10 20c-4 0-6 2-6 5s2 5 6 5" fill="#E5484D"/><rect x="13" y="31" width="16" height="6" rx="2" fill="#FFFFFF" stroke="#B42318" stroke-width="1.5"/><path d="M18 12c3-2 8-2 11 1" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"/></svg></span><span style="position: absolute; left: 600px; top: 330px; width: 48px; height: 48px; padding: 4px; border-radius: 13px; background: #FFF; box-shadow: 0 4px 10px rgba(0,0,0,.18); display: flex; transform: rotate(12deg); animation: pop .45s 31.2s both;"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M36 6c-2-2-5-1-7 1l-6 6-14-4-3 3 11 7-6 6-5-1-2 2 6 3 3 6 2-2-1-5 6-6 7 11 3-3-4-14 6-6c2-2 3-5 1-7z" fill="#0F7C7A"/></svg></span><span style="position: absolute; left: 30px; top: 320px; width: 48px; height: 48px; padding: 4px; border-radius: 13px; background: #FFF; box-shadow: 0 4px 10px rgba(0,0,0,.18); display: flex; transform: rotate(-10deg); animation: pop .45s 31.6s both;"><svg width="40" height="40" viewBox="0 0 40 40"><rect x="7" y="8" width="26" height="18" rx="2" fill="#5867E8"/><rect x="10" y="11" width="20" height="12" rx="1" fill="#E8EAFD"/><path d="M14 17l3 2-3 2M20 21h5" stroke="#5867E8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 28h34l-3 4H6z" fill="#3B4F6B"/></svg></span><span style="position: absolute; left: 320px; top: 340px; width: 48px; height: 48px; padding: 4px; border-radius: 13px; background: #FFF; box-shadow: 0 4px 10px rgba(0,0,0,.18); display: flex; transform: rotate(6deg); animation: pop .45s 32s both;"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M4 26c0-6 3-12 7-14l4 5c3 2 7 2 9 1l12 6c2 1 2 6-1 6H7c-2 0-3-2-3-4z" fill="#1466F0"/><path d="M4 30h32" stroke="#FFFFFF" stroke-width="3"/><path d="M15 20l3-2M19 22l3-2" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/><path d="M30 32h6" stroke="#FFD27A" stroke-width="2"/></svg></span></div>
+<div class="tc2">
+<div class="eb" style="color: #B7791F;">Practice &middot; 2 of 2</div>
+<div class="tt" style="font-size: 26px;">Then, graduate</div>
+<div class="bl" style="animation: fromR .6s 28s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">1</span><span class="bt" style="font-size: 18px;">The last tile: Support Case Quest.</span></div>
+<div class="bl" style="animation: fromR .6s 31s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">2</span><span class="bt" style="font-size: 18px;">Earn points, stars and streaks.</span></div>
+<div class="bl" style="animation: fromR .6s 34s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">3</span><span class="bt" style="font-size: 18px;">Pass every level to graduate.</span></div>
+<div class="call" style="background: #0B2545; animation: pop .5s 38s both;"><span class="lab" style="color: #FFFFFF; opacity: .8;">Challenge</span><span style="font-size: 18px; font-weight: 900; line-height: 1.35;">Try it at the end, and again whenever you want a challenge.</span></div>
+</div>
+</div>
+</div>
+</div>
+</template>
+
+<!-- ============ SCENE 6 · FOLLOW UP ============ -->
+<template id="scene-6">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 6: Your first steps</div><div class="h2s">A simple plan for your first weeks.</div></div>
+<div class="sc" style="left: 40px; width: 1200px; background: #E5F4DE; color: #2F7A22; animation: up .6s 1.4s both, litRing 22s 4s both;"><div class="sr"><span class="sn" style="background: #2F7A22;">1</span><span class="tg" style="background: #2F7A22;">Start here</span></div><div class="st">The plan</div><svg class="mk" width="28" height="28" style="animation: pop .5s 25.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="panel" style="animation: up .7s 2.2s both;">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #8A99AD; animation: fadeOut .5s 3.8s forwards;">Ready to start?</div>
+<div class="win" style="animation: win 22s 4s both;">
+<div class="shot" style="background: #E5F4DE; display: block;"><div style="position: absolute; left: 20px; top: 14px; width: 660px; display: flex; flex-direction: column; gap: 8px;"><div class="row" style="height: 62px; font-size: 14.5px; animation: up .45s 5s both;"><span class="sn" style="background: #2F7A22;">1</span><span>Watch trainings <b>#1 to #7</b> first: the basics of the job.</span></div><div class="row" style="height: 62px; font-size: 14.5px; animation: up .45s 6.8s both;"><span class="sn" style="background: #1466F0;">2</span><span>Then follow the numbers. Take notes in your own file as you go.</span></div><div class="row" style="height: 62px; font-size: 14.5px; animation: up .45s 8.6s both;"><span class="sn" style="background: #5867E8;">3</span><span>New word? Check the <b>Support Glossary</b> (#7).</span></div><div class="row" style="height: 62px; font-size: 14.5px; animation: up .45s 10.4s both;"><span class="sn" style="background: #C2410C;">4</span><span>On the job, search the library before you ask.</span></div><div class="row" style="height: 62px; font-size: 14.5px; animation: up .45s 12.2s both;"><span class="sn" style="background: #B42318;">5</span><span>Still unsure? Ask: Support team, Tier II or the Director of Customer Support.</span></div></div></div>
+<div class="tc2">
+<div class="eb" style="color: #2F7A22;">Your first steps &middot; 1 of 1</div>
+<div class="tt" style="font-size: 26px;">Where to begin</div>
+<div class="bl" style="animation: fromR .6s 5s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">1</span><span class="bt" style="font-size: 18px;">Start with #1 to #7.</span></div>
+<div class="bl" style="animation: fromR .6s 6.8s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">2</span><span class="bt" style="font-size: 18px;">Follow the numbers, take notes.</span></div>
+<div class="bl" style="animation: fromR .6s 10.4s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">3</span><span class="bt" style="font-size: 18px;">Search first, then ask.</span></div>
+</div>
+</div>
+</div>
+</div>
+</template>
+
+<!-- ============ SCENE 7 · PRACTICE ============ -->
+<template id="scene-7">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 7: Recap</div><div class="h2s">You&rsquo;re ready to start.</div></div>
+<div style="position: absolute; left: 40px; top: 66px; width: 1200px; height: 566px; border-radius: 22px; background: #E5F4DE; padding: 22px 26px; display: flex; flex-direction: column; gap: 10px; animation: pop .6s 1s both;"><span class="disp" style="font-size: 26px; font-weight: 700; color: #0B2545; margin-bottom: 4px;">Your training library, in five points</span><div class="row" style="height: 70px; font-size: 18px; font-weight: 700; animation: up .5s 2.5s both;"><span class="sn" style="background: #2F7A22;">1</span><span><b>Everything you need:</b> 43 trainings to learn the job, and do it well</span></div><div class="row" style="height: 70px; font-size: 18px; font-weight: 700; animation: up .5s 5.1s both;"><span class="sn" style="background: #2F7A22;">2</span><span><b>Find it fast:</b> watch in order, then search any word, anytime</span></div><div class="row" style="height: 70px; font-size: 18px; font-weight: 700; animation: up .5s 7.7s both;"><span class="sn" style="background: #2F7A22;">3</span><span><b>In every video:</b> chapters, captions, practice questions and a recap</span></div><div class="row" style="height: 70px; font-size: 18px; font-weight: 700; animation: up .5s 10.3s both;"><span class="sn" style="background: #2F7A22;">4</span><span><b>Kits and templates:</b> copy-ready notes, emails and signatures</span></div><div class="row" style="height: 70px; font-size: 18px; font-weight: 700; animation: up .5s 12.9s both;"><span class="sn" style="background: #2F7A22;">5</span><span><b>Graduate:</b> Support Case Quest, the last tile</span></div><div style="margin-top: auto; padding: 14px 20px; border-radius: 14px; background: #0B2545; color: #FFFFFF; font-size: 20px; font-weight: 900; animation: pop .5s 17s both;">Welcome to the team. You&rsquo;ve got this! If in doubt, ask: Support team, Tier II or Director of Customer Support.</div></div>
+</div>
+</template>
+
+<div id="sceneHost" style="position: absolute; inset: 0;"></div>
+
+<!-- ============ COVER ============ -->
+<div id="cover">
+<div style="position: absolute; inset: 0; background: #0B2545; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; color: #FFFFFF;">
+<div style="font-size: 16px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; color: #8FD16F;">MotionPoint Support &middot; New Agent Training</div>
+<h1 class="disp" style="margin: 0; font-size: 64px; line-height: 1.05; font-weight: 700;">Start Here: Your Training Library</h1>
+<p style="margin: 0; font-size: 22px; color: #C9D6E8; max-width: 800px;">A quick tour of the training library: what it covers, how to find your way, the video player, kits and templates, and the graduation quiz. About 5 minutes, with upbeat music, with background music.</p>
+<button type="button" id="coverPlay" style="margin-top: 14px; height: 72px; padding: 0 40px; border-radius: 36px; border: none; background: #1466F0; color: #FFFFFF; font-family: 'Lexend', sans-serif; font-size: 26px; font-weight: 600; display: flex; align-items: center; gap: 14px; cursor: pointer; box-shadow: 0 16px 40px rgba(20,102,240,.45);">
+<svg width="26" height="26" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#FFFFFF"></path></svg>Play</button>
+</div>
+</div>
+
+</div>
+
+<!-- ===================== SUBTITLES ===================== -->
+<div style="height: 70px; flex-shrink: 0; background: #0B1626; display: flex; align-items: center; justify-content: center; padding: 0 48px; position: relative; overflow: hidden;">
+<div id="subs" style="display: contents;"></div>
+</div>
+
+<!-- ===================== CONTROLS ===================== -->
+<div style="height: 80px; flex-shrink: 0; background: #0E1B2E; display: flex; flex-direction: column;">
+<div style="height: 6px; background: #1D2E48;"><div id="prog" style="height: 6px; width: 0%; background: #5DB645;"></div></div>
+<div style="flex-grow: 1; display: flex; align-items: center; gap: 10px; padding: 0 20px;">
+<button type="button" class="ctl main" id="playBtn" aria-label="Play">
+<span id="icoPause" style="display: contents;" hidden><svg width="18" height="18" viewBox="0 0 24 24"><rect x="6" y="4.5" width="4" height="15" rx="1" fill="#FFFFFF"></rect><rect x="14" y="4.5" width="4" height="15" rx="1" fill="#FFFFFF"></rect></svg></span>
+<span id="icoPlay" style="display: contents;"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#FFFFFF"></path></svg></span>
+<span id="playLabel">Play</span>
+</button>
+<button type="button" class="ctl" id="replayBtn" aria-label="Replay from start">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E6EEF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path></svg>
+</button>
+<button type="button" class="ctl" id="back10Btn" aria-label="Back 10 seconds" title="Back 10 seconds (Left arrow)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E6EEF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 17l-5-5 5-5"></path><path d="M18 17l-5-5 5-5"></path></svg>
+<span>10s</span>
+</button>
+<button type="button" class="ctl" id="fwd10Btn" aria-label="Forward 10 seconds" title="Forward 10 seconds (Right arrow)">
+<span>10s</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E6EEF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 17l5-5-5-5"></path><path d="M6 17l5-5-5-5"></path></svg>
+</button>
+<button type="button" class="ctl" id="musicBtn" aria-label="Music on" aria-pressed="true">
+<span id="icoMusicOn" style="display: contents;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8FD16F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="17" cy="16" r="3"></circle></svg></span>
+<span id="icoMusicOff" style="display: contents;" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A9B8CC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="17" cy="16" r="3"></circle><path d="M3 3l18 18"></path></svg></span>
+<span id="musicLabel" style="display:none">Music on</span>
+</button>
+<button type="button" class="ctl" id="subsBtn" aria-label="Hide captions" aria-pressed="true">
+<svg width="22" height="18" viewBox="0 0 26 20" fill="none" id="subsIcon" stroke="#8FD16F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="1.5" width="23" height="17" rx="3"></rect><path d="M11 8.2a3 3 0 1 0 0 3.6"></path><path d="M19 8.2a3 3 0 1 0 0 3.6"></path></svg>
+</button>
+<button type="button" class="ctl" id="prevBtn" aria-label="Previous scene">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E6EEF8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
+</button>
+<button type="button" class="ctl" id="nextBtn" aria-label="Next scene">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E6EEF8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg>
+</button>
+<div style="width: 1px; height: 30px; background: #2A3E5C; margin: 0 4px;"></div>
+<div style="display: flex; gap: 4px; flex-grow: 1; overflow: hidden;">
+<span id="chapters" style="display: contents;"></span>
+</div>
+<div style="font-size: 14px; font-weight: 700; color: #A9B8CC; white-space: nowrap; font-variant-numeric: tabular-nums;" id="timeLabel">0:00</div>
+</div>
+</div>
+
+
+</div>
+</div>
+<script>
+const STEP_HTML = "<div style=\"height: 52px; padding: 0 18px 0 6px; border-radius: 26px; background: #0B2545; color: #FFFFFF; display: flex; align-items: center; gap: 10px; box-shadow: 0 6px 16px rgba(11,37,69,.22); animation: pop 0.78s ease both;\">\n<span class=\"disp\" style=\"width: 40px; height: 40px; border-radius: 20px; background: #5DB645; color: #0B2545; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700;\">{{st.n}}</span>\n<span style=\"font-size: 15px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase;\">Part {{st.n}} of 7</span>\n</div>";
+const SUB_OPEN = "<div style=\"position: absolute; left: 48px; right: 48px; top: 0; height: 70px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 22px; line-height: 1.3; font-weight: 700; color: #F4F7FB; animation: up 0.7s ease both;\">";
+function fit(){ const s = Math.min(window.innerWidth / 1280, window.innerHeight / 870); document.getElementById('fit').style.transform = 'scale(' + s + ')'; }
+window.addEventListener('resize', fit); fit();
+class Player {
+  constructor() {
+    this.state = { scene: 0, el: 0, playing: false, started: false, ended: false, music: true, subsOn: true };
+    this.ctx = null;
+  }
+  durs() { return [24000, 48000, 48000, 48000, 48000, 48000, 26000, 26000]; }
+  subLines() {
+    return [[[0, "Welcome to Customer Support! Let's take a quick tour of your training library."], [4500, "It has 43 short animated trainings, from your very first day, all the way to the P1 outage process."], [7000, "Forgot something? Search any word, and find the right video in seconds."], [9500, "Some videos even have kits and templates: copy-ready notes, emails and signatures."], [12000, "And at the end, there's a graduation quiz to prove what you've learned."], [16000, "Let's go!"]],
+      [[0, "Part 1: everything you need, in one place."], [5000, "The trainings are grouped into five topics. Getting started: your role, Teams etiquette, the proxy, and how a case begins."], [9000, "Salesforce: accounts, entitlements, My Day, your list view and your email signatures."], [12000, "Every case type, and how to route it. Then procedures, tools and tech."], [26000, "Together, these trainings hold everything you need to learn the job, and carry it out well."], [31000, "What they don't cover is each customer's own preferences, likes and dislikes. You'll learn those case by case, with your team."], [37000, "New to the team? This is your path to learn the job. A veteran? It's your refresher, whenever you forget something."]],
+      [[0, "Part 2: find your way around."], [5000, "Every training is a numbered tile. Start with number one, Welcome to Customer Support."], [9000, "Watch them in order: each one builds on the one before. Click a tile to open its video."], [26000, "Later, when you need something fast, use the search bar. Type any word: a tool, a queue, a term."], [33000, "Or pick a topic, like Tools and tech, to filter the list."], [37000, "Tip: press the slash key on your keyboard to jump straight to the search box."]],
+      [[0, "Part 3: inside a training video."], [5000, "You're in control. Play and pause whenever you want."], [8000, "Go back or forward ten seconds, to catch something again."], [11000, "And use the chapter buttons to jump to any part."], [26000, "Turn captions on or off with the CC button."], [30000, "The music button turns the background music on or off."], [33000, "The badge at the top shows which part you're in."], [37000, "And every video ends with practice questions and a quick recap."]],
+      [[0, "Part 4: kits and templates. This is a favorite."], [5000, "Some videos have a button at the top right. Copy signature, in Email Signatures."], [7000, "The P1 kit, in the P1 Outage Process. The SecOps kit, in Security Issues."], [11000, "And copy-ready note templates in the PE Queues training."], [26000, "Here's how they work. Fill in a few fields, like the case number and the customer."], [30000, "Then click Copy, and paste it into Salesforce, Outlook or Teams."], [34000, "The same wording every time, nothing missed, and a lot less typing. Your notes stay clear and professional, on every case."]],
+      [[0, "Part 5: practice, then graduate."], [5000, "The last part of every video asks: what would you do? Think of your answer before it appears. Then a recap sums it all up."], [11000, "Learn at your own pace. Rewatch any part as often as you like, and keep your own notes as you go."], [26000, "When you've watched them all, open the last tile: Support Case Quest."], [30000, "Nine levels, 120 questions, points, streaks, and a Boss Round."], [34000, "A wrong answer tells you why, and which training to review. Pass every level to graduate!"]],
+      [[0, "Part 6: your first steps."], [5000, "Watch trainings one to seven first. They're the basics of the job."], [7000, "Then follow the numbers, and take notes in your own file as you go."], [9000, "Hear a word you don't know? Check the Support Glossary."], [12000, "On the job, search the library before you ask."], [15000, "Still unsure? Ask the Support team, Tier II, or the Director of Customer Support."]],
+      [[0, "Part 7: let's recap."], [2500, "Everything you need: 43 trainings to learn the job, and do it well."], [5000, "Find it fast: watch in order, then search any word, anytime."], [7500, "In every video: chapters, captions, practice questions and a recap."], [10000, "Kits and templates: copy-ready notes, emails and signatures."], [12500, "And graduate with Support Case Quest, the last tile."], [17000, "Welcome to the team. You've got this!"]]];
+  }
+  labels() { return ["Intro", "Everything", "Find your way", "Inside a video", "Kits", "Graduate", "First steps", "Recap"]; }
+
+  /* ---------- original background jazz, synthesized live ---------- */
+  bars() {
+    // [bass walk (MIDI), chord voicing (MIDI)] — ii-V-I in F with turnarounds, 80 bpm swing
+    return [
+      [[43, 46, 50, 47], [58, 62, 65, 69]], // Gm9
+      [[48, 46, 43, 40], [58, 62, 64, 69]], // C13
+      [[41, 45, 48, 49], [57, 60, 64, 67]], // Fmaj9
+      [[50, 48, 45, 44], [54, 60, 64, 69]], // D9
+      [[43, 46, 50, 47], [58, 62, 65, 69]], // Gm9
+      [[48, 46, 43, 40], [58, 62, 64, 69]], // C13
+      [[45, 48, 52, 51], [60, 64, 67, 71]], // Am9
+      [[50, 48, 45, 44], [54, 60, 64, 69]]  // D9
+    ];
+  }
+  hz(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+  initAudio() {
+    if (this.ctx) return true;
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return false;
+      const ctx = new AC();
+      const master = ctx.createGain();
+      master.gain.value = 0;
+      master.connect(ctx.destination);
+      const len = Math.floor(ctx.sampleRate * 1.0);
+      const noise = ctx.createBuffer(1, len, ctx.sampleRate);
+      const data = noise.getChannelData(0);
+      for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+      this.ctx = ctx; this.master = master; this.noise = noise;
+      this.beat = 0; this.nextT = 0;
+      return true;
+    } catch (e) { return false; }
+  }
+  pianoNote(m, t, vel, dur) {
+    const c = this.ctx;
+    const f = this.hz(m);
+    const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(2600, t); lp.frequency.exponentialRampToValueAtTime(900, t + dur);
+    const g = c.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vel, t + 0.006);
+    g.gain.exponentialRampToValueAtTime(vel * 0.3, t + 0.4);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    lp.connect(g); g.connect(this.master);
+    [[1, 1], [2, 0.28], [3, 0.08]].forEach((h) => {
+      const o = c.createOscillator(); o.type = 'sine'; o.frequency.value = f * h[0];
+      const hg = c.createGain(); hg.gain.value = h[1];
+      o.connect(hg); hg.connect(lp);
+      o.start(t); o.stop(t + dur + 0.05);
+    });
+  }
+  pianoChord(notes, t, vel, dur) {
+    notes.forEach((m, i) => this.pianoNote(m, t + i * 0.018, vel, dur));
+  }
+  tap(t, vol, dur, freq) {
+    const c = this.ctx;
+    const s = c.createBufferSource(); s.buffer = this.noise;
+    const f = c.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = freq;
+    const g = c.createGain();
+    g.gain.setValueAtTime(vol, t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(this.master);
+    s.start(t); s.stop(t + dur + 0.02);
+  }
+  kick(t) {
+    const c = this.ctx, o = c.createOscillator(), g = c.createGain();
+    o.type = 'sine'; o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(42, t + 0.14);
+    g.gain.setValueAtTime(0.32, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+    o.connect(g); g.connect(this.master); o.start(t); o.stop(t + 0.25);
+  }
+  bassNote(m, t, vel, dur) {
+    const c = this.ctx, o = c.createOscillator(), lp = c.createBiquadFilter(), g = c.createGain();
+    o.type = 'sawtooth'; o.frequency.value = this.hz(m);
+    lp.type = 'lowpass'; lp.frequency.setValueAtTime(900, t); lp.frequency.exponentialRampToValueAtTime(260, t + dur);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vel, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(lp); lp.connect(g); g.connect(this.master); o.start(t); o.stop(t + dur + 0.05);
+  }
+  pluck(m, t, vel, dur) {
+    const c = this.ctx, o = c.createOscillator(), g = c.createGain();
+    o.type = 'triangle'; o.frequency.value = this.hz(m);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vel, t + 0.005); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(this.master); o.start(t); o.stop(t + dur + 0.05);
+  }
+  scheduleBeat(i, t) {
+    // original high-energy piano-rock groove, 148 bpm, eighth-note steps: C - Em - F - G, then Am - F - C/G - G
+    const A = [[36, [60, 64, 67, 72]], [40, [59, 64, 67, 71]], [41, [60, 65, 69, 72]], [43, [59, 62, 67, 71]]];
+    const B = [[45, [60, 64, 69, 72]], [41, [60, 65, 69, 72]], [43, [60, 64, 67, 72]], [43, [62, 65, 67, 71]]];
+    const st = i % 8, bar = Math.floor(i / 8) % 4, sec = Math.floor(i / 32) % 4, p = (sec === 2 ? B : A)[bar];
+    if (st === 0 || st === 3 || st === 4) this.kick(t);
+    if (st === 2 || st === 6) { this.tap(t, 0.07, 0.14, 1500); this.tap(t, 0.035, 0.09, 4000); }
+    this.tap(t, st % 2 ? 0.018 : 0.011, 0.035, 9000);
+    this.bassNote(p[0] + (st === 7 ? 2 : 0), t, 0.085, 0.16);
+    // driving piano: chord on every eighth, accents on beats
+    this.pianoChord(p[1], t, st % 2 ? 0.016 : 0.026, 0.2);
+    if (sec > 0 && st % 2 === 0) { const run = [0, 1, 2, 3, 2, 1, 2, 3]; this.pluck(p[1][run[(st + bar * 2) % 8]] + 12, t, 0.024, 0.18); }
+    if (sec === 3 && st === 7 && bar === 3) { this.tap(t, 0.05, 0.4, 5000); }
+  }
+  schedule() {
+    const c = this.ctx;
+    if (!c || c.state !== 'running' || !this.musicLive) return;
+    if (this.nextT < c.currentTime) this.nextT = c.currentTime + 0.05;
+    while (this.nextT < c.currentTime + 0.3) {
+      this.scheduleBeat(this.beat, this.nextT);
+      this.beat = (this.beat + 1) % 128;
+      this.nextT += 60 / 148 / 2;
+    }
+  }
+  musicStart() {
+    if (!this.state.music || !this.initAudio()) return;
+    const c = this.ctx;
+    try { c.resume(); } catch (e) {}
+    if (!this.musicLive) {
+      this.musicLive = true;
+      this.beat = 0;
+      this.nextT = c.currentTime + 0.1;
+      this.master.gain.cancelScheduledValues(c.currentTime);
+      this.master.gain.setValueAtTime(0.0001, c.currentTime);
+      this.master.gain.exponentialRampToValueAtTime(0.55, c.currentTime + 1.5);
+    }
+  }
+  musicStop(fade) {
+    if (!this.ctx) return;
+    const c = this.ctx;
+    this.musicLive = false;
+    const now = c.currentTime;
+    this.master.gain.cancelScheduledValues(now);
+    this.master.gain.setValueAtTime(Math.max(this.master.gain.value, 0.0001), now);
+    this.master.gain.exponentialRampToValueAtTime(0.0001, now + (fade || 0.3));
+  }
+  musicPause() { if (this.ctx) { try { this.ctx.suspend(); } catch (e) {} } }
+  musicResume() { if (this.ctx && this.state.music) { try { this.ctx.resume(); } catch (e) {} } }
+
+  componentDidMount() {
+    this.iv = setInterval(() => this.tick(), 200);
+    this.au = setInterval(() => this.schedule(), 60);
+  }
+  componentWillUnmount() {
+    clearInterval(this.iv); clearInterval(this.au); clearTimeout(this.to);
+    if (this.ctx) { try { this.ctx.close(); } catch (e) {} }
+  }
+  tick() {
+    const s = this.state;
+    if (!s.playing || s.scene < 0) return;
+    const d = this.durs();
+    const el = s.el + 200;
+    if (el >= d[s.scene]) {
+      if (s.scene < d.length - 1) this.setState({ scene: s.scene + 1, el: 0 });
+      else { this.setState({ el: d[s.scene], playing: false, ended: true }); this.musicStop(3); }
+    } else {
+      this.setState({ el: el });
+    }
+  }
+  go(i, off) {
+    off = off || 0;
+    clearTimeout(this.to);
+    this.musicStart();
+    this.musicResume();
+    this.setState({ scene: -1, el: 0 });
+    this.to = setTimeout(() => {
+      this.setState({ scene: i, el: off, started: true, playing: true, ended: false });
+      if (off) setTimeout(() => this.sync(off), 60);
+    }, 40);
+  }
+  sync(off) {
+    try {
+      const st = document.querySelector('.stage');
+      if (!st || !st.getAnimations) return;
+      st.getAnimations({ subtree: true }).forEach((a) => { try { a.currentTime = off; } catch (e) {} });
+    } catch (e) {}
+  }
+  jump(delta) {
+    const d = this.durs();
+    const s = this.state;
+    const cur = s.scene < 0 ? 0 : s.scene;
+    let t = 0;
+    for (let i = 0; i < cur; i++) t += d[i];
+    t += (s.scene < 0 || !s.started) ? 0 : s.el;
+    const total = d.reduce((a, b) => a + b, 0);
+    t = Math.max(0, Math.min(t + delta, total - 500));
+    let i = 0;
+    while (i < d.length - 1 && t >= d[i]) { t -= d[i]; i++; }
+    this.go(i, t);
+  }
+  fmt(ms) {
+    const t = Math.floor(ms / 1000);
+    const m = Math.floor(t / 60);
+    const sec = t % 60;
+    return m + ':' + (sec < 10 ? '0' : '') + sec;
+  }
+  renderVals() {
+    const s = this.state;
+    const d = this.durs();
+    const total = d.reduce((a, b) => a + b, 0);
+    const cur = s.scene < 0 ? 0 : s.scene;
+    let done = 0;
+    for (let i = 0; i < cur; i++) done += d[i];
+    done += s.scene < 0 ? 0 : s.el;
+    const vis = s.started ? s.scene : -2;
+    const chapters = this.labels().map((label, i) => ({
+      label: label,
+      cls: s.started && i === cur ? 'on' : (s.started && i < cur ? 'done' : ''),
+      go: () => this.go(i)
+    }));
+    return {
+      s0: vis === 0, s1: vis === 1, s2: vis === 2, s3: vis === 3, s4: vis === 4, s5: vis === 5, s6: vis === 6, s7: vis === 7,
+      showCover: !s.started,
+      pauseCls: s.playing ? '' : 'paused',
+      isPlaying: s.playing,
+      notPlaying: !s.playing,
+      playLabel: s.playing ? 'Pause' : (s.ended ? 'Replay' : 'Play'),
+      progressW: (Math.min(1, done / total) * 100).toFixed(2) + '%',
+      timeLabel: this.fmt(done) + ' / ' + this.fmt(total),
+      chapters: chapters,
+      steps: [1, 2, 3, 4, 5, 6, 7].map((n) => ({ n: n, on: s.started && s.scene >= 0 && s.scene === n })),
+      showSubs: s.subsOn && s.started,
+      subs: (() => {
+        const L = s.scene >= 0 ? this.subLines()[s.scene] : [];
+        let act = -1;
+        L.forEach((c, i) => { if (s.el >= c[0]) act = i; });
+        return L.map((c, i) => ({ text: c[1], on: i === act }));
+      })(),
+      subsOn: s.subsOn,
+      subsLabel: s.subsOn ? 'Hide captions' : 'Show captions',
+      subsColor: s.subsOn ? '#8FD16F' : '#A9B8CC',
+      toggleSubs: () => this.setState({ subsOn: !this.state.subsOn }),
+      musicOn: s.music,
+      musicOff: !s.music,
+      musicLabel: s.music ? 'Music on' : 'Music off',
+      toggleMusic: () => {
+        const on = !this.state.music;
+        this.setState({ music: on }, () => {
+          if (!on) this.musicStop(0.6);
+          else if (this.state.playing) this.musicStart();
+        });
+      },
+      togglePlay: () => {
+        if (!this.state.started || this.state.ended) this.go(0);
+        else {
+          const playing = !this.state.playing;
+          if (playing) this.musicResume(); else this.musicPause();
+          this.setState({ playing: playing });
+        }
+      },
+      replay: () => this.go(0),
+      back10: () => this.jump(-10000),
+      fwd10: () => this.jump(10000),
+      prev: () => this.go(Math.max(0, cur - 1)),
+      next: () => this.go(Math.min(d.length - 1, cur + 1))
+    };
+  }
+}
+
+Player.prototype.setState = function (obj, cb) { Object.assign(this.state, obj); this.render(); if (cb) cb(); };
+Player.prototype.render = function () {
+  const v = this.renderVals();
+  const $ = (id) => document.getElementById(id);
+  const s = this.state;
+  const vis = s.started ? s.scene : -2;
+  if (vis !== this._vis) {
+    this._vis = vis;
+    const tpl = $('scene-' + vis);
+    $('sceneHost').innerHTML = tpl ? tpl.innerHTML : '';
+  }
+  $('stage').classList.toggle('paused', !s.playing);
+  $('cover').hidden = !v.showCover;
+  const st = v.steps.find((x) => x.on);
+  const stn = st ? st.n : 0;
+  if (stn !== this._step) { this._step = stn; $('steps').innerHTML = stn ? STEP_HTML.split('{{st.n}}').join(String(stn)) : ''; }
+  const sb = v.showSubs ? v.subs.find((x) => x.on) : null;
+  const key = sb ? s.scene + '|' + sb.text : '';
+  if (key !== this._sub) {
+    this._sub = key;
+    $('subs').innerHTML = '';
+    if (sb) { const d = document.createElement('div'); d.innerHTML = SUB_OPEN + '</div>'; d.firstChild.textContent = sb.text; $('subs').appendChild(d.firstChild); }
+  }
+  $('prog').style.width = v.progressW;
+  $('timeLabel').textContent = v.timeLabel;
+  $('playLabel').textContent = v.playLabel;
+  $('playBtn').setAttribute('aria-label', v.playLabel);
+  $('icoPause').hidden = !v.isPlaying; $('icoPlay').hidden = v.isPlaying;
+  $('musicLabel').textContent = v.musicLabel; $('musicBtn').setAttribute('aria-label', v.musicLabel); $('musicBtn').setAttribute('aria-pressed', String(v.musicOn));
+  $('icoMusicOn').hidden = !v.musicOn; $('icoMusicOff').hidden = v.musicOn;
+  $('subsBtn').setAttribute('aria-label', v.subsLabel); $('subsBtn').setAttribute('aria-pressed', String(v.subsOn)); $('subsIcon').setAttribute('stroke', v.subsColor);
+  const ck = v.chapters.map((c) => c.cls).join(',');
+  if (ck !== this._chips) {
+    this._chips = ck;
+    const host = $('chapters'); host.innerHTML = '';
+    v.chapters.forEach((c, i) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'chip ' + c.cls; b.textContent = c.label;
+      b.addEventListener('click', () => this.go(i)); host.appendChild(b);
+    });
+  }
+};
+const P = new Player();
+const call = (k) => () => P.renderVals()[k]();
+document.getElementById('coverPlay').addEventListener('click', call('togglePlay'));
+document.getElementById('playBtn').addEventListener('click', call('togglePlay'));
+document.getElementById('replayBtn').addEventListener('click', call('replay'));
+document.getElementById('prevBtn').addEventListener('click', call('prev'));
+document.getElementById('back10Btn').addEventListener('click', call('back10'));
+document.getElementById('fwd10Btn').addEventListener('click', call('fwd10'));
+document.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') { e.preventDefault(); call('back10')(); } else if (e.key === 'ArrowRight') { e.preventDefault(); call('fwd10')(); } else if (e.key === ' ' && e.target === document.body) { e.preventDefault(); call('togglePlay')(); } });
+document.getElementById('nextBtn').addEventListener('click', call('next'));
+document.getElementById('musicBtn').addEventListener('click', call('toggleMusic'));
+document.getElementById('subsBtn').addEventListener('click', call('toggleSubs'));
+P.render();
+P.componentDidMount();
+
+</script>
+<style>#chapters .chip{padding-left:6px!important;padding-right:6px!important;font-size:11.5px!important}</style></body>
+</html>
